@@ -81,6 +81,8 @@ label eval_tdomi_remy:
         #Change post ending to include something about the portal being broken (Remy breaks the news to MC after their coma)
     $ save_name = (_("Ice Cream"))
 
+    $ evalVaraHere = False
+
     #Because multipersistents are buggy, I am creating a custom variable for mp.remyromance
     if mp.remyromance or evalRemyRomance:
         $ evalRemyRomance = True
@@ -90,6 +92,8 @@ label eval_tdomi_remy:
     scene black with dissolveslow
 
     $ renpy.pause (1.0)
+
+    $ renpy.loadsave.autosave()
 
     nvl clear
     m "Wait a minute!" with Shake ((0, 0, 0, 0), 2, dist=10)
@@ -283,8 +287,8 @@ label eval_tdomi_remy:
                             show remy look with dissolvemed
                             Ry "What?"
                             play music "mx/jazzy.ogg"
-                            $ remystatus=evalRemyStatus
                             c "I'm sorry, you're right. It was extremely selfish of me to prioritize my own enjoyment over that of yours and the childrens'."
+                            $ remystatus = evalRemyStatus
                             Ry normal "I'm glad to hear that. I was worried for a second that you really were just that unkind."
                             c "No, I think I just overreacted. Human children can be a complete nightmare sometimes."
                             Ry "Well, so can dragon children, but you just learn to accept that they haven't had as much time on the planet as us, and sometimes have difficulty expressing their emotions in other ways."
@@ -348,21 +352,15 @@ label eval_tdomi_remy:
                     $ evalRemyStatus=remystatus#store remy's original status
                     $ remystatus="bad"#having Remy's status change to bad can add a punch to the gut
                     c "It beats the yelling and screaming."
+                    $ evalRemyStatus = remystatus
+                    $ remystatus = "bad"
                     if evalVaraHere:
-                        show vara sad flip
-                    show remy angry
-                    with dissolvemed
-                    Ry "You know what? Taking a simple walk sounds like a pretty boring day out together. I think I'd rather go to the orphanage by myself."
-                    if evalVaraHere:
-                       hide vara
-                    hide remy
-                    with dissolvemed
+                        show vara sad flip with dissolvemed
+                    Ry angry "You know what? Taking a simple walk sounds like a pretty boring day out together. I think I'd rather go to the orphanage by myself."
+                    hide remy with dissolvemed
                     stop music fadeout 2.0
                     play sound "fx/evalgrasswalk1.ogg"
-                    if evalVaraHere:
-                        m "The dragons stormed off and prepared to fly over to the orphanage."
-                    else:
-                        m "The dragon stormed off and prepared to fly over to the orphanage."
+                    m "The dragon stormed off and prepared to fly over to the orphanage."
                     
                     menu:
                         "[[Stop Remy]" if not evalVaraHere:
@@ -383,19 +381,19 @@ label eval_tdomi_remy:
                             c "You're probably right."
                             Ry normal "Great, we can start making our way over there now!"
                             jump eval_trip_to_orphanage
-                        
+
                         "[[Stop them]" if evalVaraHere:
                             c "Wait! Remy!"
                             play sound "fx/evalgrasswalk2.ogg"
                             m "Remy and Vara looked at me and walked back over."
-                            $ renpy.pause (1.0) #This should fix it? No? Fixed. I'm an idiot
+                            $ renpy.pause (1.0)
                             show vara sad flip at Position(xpos=0.30, xanchor='center', ypos=0.8, yanchor="center")
                             show remy look behind vara at Position(xpos=0.70,xanchor='center',ypos=1.0,yanchor="bottom")
                             with dissolvemed
                             Ry "What?"
                             play music "mx/jazzy.ogg"
-                            $ remystatus=evalRemyStatus
                             c "I'm sorry, you're right. It was extremely selfish of me to prioritize my own enjoyment over that of yours and the childrens'."
+                            $ remystatus = evalRemyStatus
                             Ry normal "I'm glad to hear that. I was worried for a second that you really were just that unkind."
                             c "No, I think I just overreacted. Human children can be a complete nightmare sometimes."
                             show vara normal flip with dissolvemed
@@ -405,11 +403,10 @@ label eval_tdomi_remy:
                             c "You're probably right."
                             Ry normal "Great, we can start making our way over there now!"
                             jump eval_trip_to_orphanage
-                        
-                        "[[Let him leave.]":
+                        "[[Let him leave]":
                             play sound "fx/takeoff.ogg"
                             if evalVaraHere:
-                                m "I silently watched as Vara got onto Remy's back before Remy flew away"
+                                m "I silently watched as Vara got onto Remy's back before he flew off to the orphanage."
                             else:
                                 m "I silently watched as Remy extended his wings and flew off to the orphanage."
                             "???" "You are an idiot."
@@ -1957,10 +1954,10 @@ label eval_remy_amely_1:
             hide remy with dissolvemed
             play sound "fx/takeoff.ogg"
             m "Just like that, the dragon gracefully took off into the air, soaring away over the trees."
-    stop music fadeout 2.0
-    scene black with dissolveslow
-    $ persistent.evalEndingB = True
-    jump eval_custom_credits
+            stop music fadeout 2.0
+            scene black with dissolveslow
+            $ persistent.evalEndingB = True
+            jump eval_custom_credits
 
 label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyone, idk what you're talking about.
     #Going to use this twice, one where you DO ride remy beforehand and when you DO help at the orphanage. That's gonna be a lot of refactoring...
@@ -1992,6 +1989,7 @@ label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyon
             "Yes. I want to skip ahead.":
                 play sound "fx/system3.wav"
                 s "As you wish.{cps=2}..{/cps}{w=1.0}{nw}"
+                stop music fadeout 2.0
                 show black with dissolvemed
                 $ renpy.pause (1.0)
                 $ persistent.skipnumber += 1
@@ -2492,13 +2490,13 @@ label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyon
             Ka "I'll... go get you your ice cream, [player_name]."
             show katsu exhausted with dissolvemed
             hide katsu with easeoutleft
-            Ad frustrated b "Did you seriously make us come all the way just to flake out on us?"
+            Ad frustrated b "Did you seriously make us come all the way out here just to flake out on us?"
             c "Sorry, Adine. I just really don't feel like doing this right now."
             c "Also, can't you just wait in line and get the ice cream for yourselves."
-            Ad "Ugh. It isn't about the ice cream any more, [player_name]! It was about spending time together."
+            Ad "Ugh. It isn't about the ice cream anymore, [player_name]! It was about spending time together."
             Ad sad b "But I see how it is. You care more about yourself than your friends."
             Ad annoyed b "I can't believe that I ever thought you were a friend of mine."
-            Ad sad b "If you will excuse me, I'm going to go talk to Remy. You really hurt him with that, [player_name]."
+            Ad sad b "If you will excuse me, I'm going to go talk to Remy. You really hurt him with that."
             c "I..."
             Ad annoyed b "Shut up."
             show adine disappoint b flip with dissolvemed

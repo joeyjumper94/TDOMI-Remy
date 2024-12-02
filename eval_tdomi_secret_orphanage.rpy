@@ -160,7 +160,16 @@ label eval_secret_orphanage_game:
     #Complete the game if the player runs out of time
     elif evalRemainingMinutes <= 0:
         $ evalDisplayVar1 = 0
-        Ry "Adine should be here any minute, [player_name]."
+        if evalRemyOnMission:
+            show remy normal behind vara
+            show amely smnormal
+            with easeinright
+            if evalMinutesRemyIsGone > 0:
+                Ry "I came back early as soon as I noticed the time. Adine should be here any minute, [player_name]."
+            else:
+                Ry "Adine should be here any minute, [player_name]."
+        else:
+            Ry "Adine should be here any minute, [player_name]."
         c "But we aren't done!"
         if evalTasksComplete > 3:
             Ry smile "We still did quite a lot in one day. Don't worry, Adine and I can finish the rest in the next few days."
@@ -362,9 +371,9 @@ label eval_secret_orphanage_game:
 
         "Wait.":
             if evalRemyOnMission:
-                m "I should wait for Remy to get back."
+                c "(I should wait for Remy to get back.)"
             else:
-                m "I should take a quick break."
+                c "(I should take a quick break.)"
             $ evalRemainingMinutes -= 15
             if evalRemyOnMission:
                 $ evalMinutesRemyIsGone -= 15
@@ -1161,8 +1170,8 @@ label eval_secret_orphanage_end: #Change the music
     hide screen evalextrainfo
     stop music fadeout 2.0
     $ renpy.pause (3.0)
-    play music "mx/comfy.mp3" #Custom music for the secret ending. Nice
     if evalOrphanageScore == 2:
+        play music "mx/comfy.mp3"
         Ry smile "Wow, [player_name]! This place hasn't looked this good in years!"
         Ry "It was definitely worthy of a couple high fives."
         Ry look "We really need to think about changing the name of that, though."
@@ -1243,7 +1252,6 @@ label eval_secret_orphanage_end: #Change the music
             stop music fadeout 2.0
             jump eval_everyone_1
     else:
-        "Well, Adine should be here any minute now..."
         jump eval_everyone_1
     
 label eval_too_many_crackers:
@@ -1272,7 +1280,3 @@ label eval_too_many_crackers:
     $ renpy.pause (2.0)
     $ evalFail = "Cracker Addict"
     jump eval_fails
-    #a scene where our MC apologizes for scaring Vara like that,
-    #perhaps they mention a few other times they over did something and passed out
-    #like that time they OD'd on pain meds in the prologue
-    #or the drinking contest with Bryce in chapter 1

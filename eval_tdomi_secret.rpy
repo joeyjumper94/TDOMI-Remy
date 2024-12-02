@@ -1447,7 +1447,7 @@ label eval_everyone_2:
         c "Sure."
         hide vara with dissolvemed
         m "I grabbed Vara and lifted her onto Remy's back."
-        m "It was quite a sight seeing the small, pink dragon riding on Remy's back"
+        m "It was quite a sight seeing the small, pink dragon riding on Remy's back."
         Ry "You alright up there, Vara?"
         Vr "Yes."
         Ry "Alright then. See you soon, [player_name]."

@@ -435,7 +435,7 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
             $ renpy.pause (1.5)
             Vr smshocked flip "..."
             m "What must have been the finale for the day's firework show seemed to frighten Vara."
-            show vara at right with move
+            show vara smshocked flip at right with move
             show vara smshocked with dissolvemed
             Ry "It's alright, Vara. It's just some fireworks."
             Vr "..."
@@ -604,7 +604,7 @@ label eval_remy_ch4_date_change_2:
 
         menu:
             "Look away.":
-                $ remystatus="neutral"
+                $ remystatus = "neutral"
                 hide remyrom
                 hide remy
                 with fade
@@ -620,7 +620,7 @@ label eval_remy_ch4_date_change_2:
                 show remy normal with dissolvemed
                 $ renpy.pause (1.0)
             "Kiss him.":
-                $ mp.remyromance=True
+                $ mp.remyromance = True
                 $ evalRemyRomance = True
                 $ mp.save()
                 hide remyrom
@@ -701,7 +701,7 @@ label eval_remy_ch4_date_change_2:
     c "Glad to hear that, Remy. You're a lot braver than you make yourself out to be."
     Ry "Well, you're making me work double-time here. Before you, I didn't have to worry about all of this nonsense."
     Ry normal "But you know what? I wouldn't have it any other way."
-    if remystatus=="good":
+    if remystatus == "good":
         m "Remy gave me a playful lick on the cheek."
     Ry "I'm still stressed beyond belief, but let's not let this impact us too heavily."
     Ry "We have to be ready to protect Vara."
@@ -864,8 +864,8 @@ label eval_remy_good_ending_change: #And so the contruction of a completely new 
     Ry "They helped me reunite with old friends, move on from the past, and find this lovely little dragon next to me."
     Mv "I... I didn't know it was that bad, Remy. I'm so sorry."
     Ry "Feel bad for me later, Maverick. We have to help [player_name]."
-    Mv normal b flip "I can't say I fully trust [player_name], Remy, but I'll still help you."
-    Vr "I help?"
+    Mv normal flip "I can't say I fully trust [player_name], Remy, but I'll still help you."
+    Vr "I help too?"
     Ry sad "Vara, you should stay here where you'll be safe."
     Vr "..."
     Ry "I promise, Vara. We will come back when it's safe."
