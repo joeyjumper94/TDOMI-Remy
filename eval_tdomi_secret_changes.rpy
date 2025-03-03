@@ -170,11 +170,14 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
         if persistent.evalSecretEndingCompleted:
             play sound "fx/system3.wav"
             s "It seems that you have already seen the true ending for This Dragon Owes me Ice Cream. Would you like to experience it again or the normal turn of events?"
+
             menu:
                 "True ending path.":
                     play sound "fx/system3.wav"
                     s "As you wish.{cps=2}..{/cps}{w=1.0}{nw}"
                     $ renpy.pause (1.0)
+                    pass
+
                 "Normal ending path.":
                     play sound "fx/system3.wav"
                     s "As you wish.{cps=2}..{/cps}{w=1.0}{nw}"
@@ -280,6 +283,7 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
         c "I know, I'm kidding."
         Ry normal "I'm not."
         scene black with dissolveslow
+
         scene evalplayerkitchen with dissolveslow
         show remy normal at right
         show vara smnormal flip at left
@@ -331,21 +335,21 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
         show remy normal at right with easeinright
         show vara smnormal at left with easeinright
         show vara smnormal flip at left with dissolvemed
-        $ evalVaraMood=1
+        $ evalVaraMood = 1
         Ry smile "Impressive, isn't it?"
 
         menu:
             "Looks amazing.":
-                $ evalVaraMood +=2
+                $ evalVaraMood += 2
                 c "I'll say! That looks wonderful."
                 show vara smsmile flip with dissolvemed
             
             "It looks alright.":
-                $ evalVaraMood +=1
+                $ evalVaraMood += 1
                 c "It looks good."
             
             "I could have done better.":
-                $ evalVaraMood -=1
+                $ evalVaraMood -= 1
                 c "I think I could have done better myself."
                 Ry look "Is that so?"
                 Vr smsad flip "..."
@@ -367,14 +371,14 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
 
         menu:
             "Sure!":
-                $ evalVaraMood +=2
+                $ evalVaraMood += 2
                 c "I'd love to."
                 m "I grabbed a piece of sushi and looked at it for a moment."
                 show vara smnone flip with dissolvemed
                 m "Vara looked at me nervously as I put the piece of sushi in my mouth."
                 m "It was amazing. The buttery fish complemented the somewhat tangy taste of the algae and the crispness of the cucumber."
                 c "Wow, Vara! This is really good!"
-                if evalVaraMood >=4:
+                if evalVaraMood >= 4:
                     Vr "..."
                     Vr smnone flip "T... {w}T..."
                     Vr smsmile flip "Thanks."
@@ -399,7 +403,7 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
                 m "It was amazing. The buttery fish complemented the somewhat tangy taste of the algae and the crispness of the cucumber."
                 c "Wow, Vara! This is really good!"
                 show vara smnormal flip with dissolvemed
-                if evalVaraMood >=4:
+                if evalVaraMood >= 4:
                     Vr smnone flip "T... Th..."
                     Vr smnormal flip "Thanks."
                     c "You're welcome, Vara. I really mean it too."
@@ -416,7 +420,7 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
                 m "Remy then washed off the cutting board and put it back on the counter."
 
             "No thank you.":
-                $ evalVaraMood -=1
+                $ evalVaraMood -= 1
                 c "I'm not hungry right now."
                 Ry look "Oh, okay then."
                 Vr smsad flip "..."
@@ -494,7 +498,7 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
             show vara smnormal with dissolvemed
             Ry "Alright, Vara. Let's get ready for bed, then."
             m "The two dragons started making their way over to the couch."
-            if remystatus=="neutral":
+            if remystatus == "neutral":
                 m "My mind still spinning, I made my way into the bedroom."
                 play sound "fx/undress.ogg"
                 m "I quickly undressed and, too tired to prepare any further, fell asleep."
@@ -513,7 +517,7 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
                         m "I quickly undressed and, too tired to prepare any further, fell asleep."
                         scene black with dissolvemed
                     "Share the bed.":
-                        $ evalRemyDateBed=True
+                        $ evalRemyDateBed = True
                         c "Hey, wait."
                         c "Why don't we share the bed? I don't want you both to have to share that tiny couch."
                         Ry smile "I could keep a closer eye on you as well. What do you say, Vara?"
@@ -547,7 +551,7 @@ label eval_remy_ch4_date_change: #This changes up the end of Remy's date to acco
             c "Likewise."
             Ry "Can you say goodbye, Vara?"
             if evalVaraMood < 0:
-                play sound "fx/growl.ogg"
+                play sound "fx/varagrowl.ogg"
                 $ renpy.pause (2.0)
                 Ry look "I guess not..."
             else:
@@ -619,6 +623,7 @@ label eval_remy_ch4_date_change_2:
                 m "Remy put his tie back on."
                 show remy normal with dissolvemed
                 $ renpy.pause (1.0)
+
             "Kiss him.":
                 $ mp.remyromance = True
                 $ evalRemyRomance = True
@@ -640,7 +645,7 @@ label eval_remy_ch4_date_change_2:
                 hide remy with dissolvemed
                 play sound "fx/undress.ogg"
                 m "Remy put his tie back on."
-                $ remystatus="good"
+                $ remystatus = "good"
                 show remy normal with dissolvemed
                 $ renpy.pause (1.0)
 
@@ -712,18 +717,26 @@ label eval_remy_ch4_date_change_2:
     Ry "You too, [player_name]. I'll be ready."
     stop music fadeout 2.0
     scene black with dissolveslow
-    $ evalPathToSecretComplete=True
+    $ evalPathToSecretComplete = True
     jump eval_post_date_change
 
 label eval_post_date_change: #Skips back to character select after the changed ch4 Remy date
     $ renpy.pause (2.0)
-    $ remyscenesfinished=4
-    if chapter4unplayed==False:
+
+    $ remyscenesfinished = 4
+
+    if chapter4unplayed == False:
+
         jump chapter4chars
-    elif chapter3unplayed==False:
+
+    elif chapter3unplayed == False:
+
         jump chapter3chars
-    elif chapter2unplayed==False:
+
+    elif chapter2unplayed == False:
+
         jump chapter2chars
+
     else:
         jump chapter1chars
 
@@ -735,7 +748,7 @@ label eval_remy_good_ending_change: #And so the contruction of a completely new 
     $ renpy.pause (0.5)
     scene o2 at Pan((0, 250), (0, 250), 0.0) with dissolveslow
 
-    $ save_name=(_("Chapter 5 - Remy"))
+    $ save_name = (_("Chapter 5 - Remy"))
 
     play sound "fx/door/doorbell.wav"
     $ renpy.pause(1.0)
@@ -918,7 +931,7 @@ label eval_remy_good_ending_change: #And so the contruction of a completely new 
     queue sound2 "fx/impact3.ogg"
     hide izumi with easeoutbottom
     m "He pulled the trigger, and the Administrator fell to the ground with a dull thud that knocked her mask off."
-    $ persistent.izumiseen=True
+    $ persistent.izumiseen = True
     show izumiinjured4 at Pan((300, 0), (600, 608), 7.0) with fade
     $ renpy.pause (5.0)
     hide izumiinjured4
@@ -1052,7 +1065,7 @@ label eval_remy_good_ending_change: #And so the contruction of a completely new 
     As "This is not right."
     c "What do you mean?"
     show vara smgrowl flip at Position(xpos=-0.1) with dissolvemed
-    play sound "fx/growl.ogg"
+    play sound "fx/varagrowl.ogg"
     show vara smgrowl flip at left with move
     $ renpy.pause (1.5)
     c "Vara, It's okay. She's a friend."
@@ -1102,8 +1115,10 @@ label eval_remy_good_ending_change: #And so the contruction of a completely new 
     $ renpy.pause (0.5)
     scene black with dissolveslow
     $ renpy.pause (2.0)
+
     nvl clear
     window show
+
     n "Soon, more help arrived. Remy and I got all the medical attention we needed while Vara was sent to Adine to be taken care of."
     n "Maverick had only sustained minor burn injuries and abrasions. However, Reza and Izumi were both dead."
     n "I warned the dragons about the comet, telling them to check the PDAs I had given them for verification of my claims."
@@ -1111,30 +1126,37 @@ label eval_remy_good_ending_change: #And so the contruction of a completely new 
     n "In the weeks I was out, a number of things happened."
     n "Out of respect, Reza's body was given a proper funeral in a remote location. His weapon and remaining ammunition were to be left in my care."
     n "After attempts were made to make contact with the human world, it was discovered that the portal was no longer operational."
+
     window hide
     nvl clear
     window show
+
     n "Upon this discovery, the dragons sent their brightest engineers in attempts to establish a connection with the human world."
     n "However, after weeks of unsuccessful attempts, the operation was deemed to be a failure."
     n "Ultimately, the dragons decided to leave the portal standing in its current state."
     n "Fortunately, my claims were taken seriously, and there was already a plan in place to divert the comet."
     n "Using the lab's generators, the dragons were successfully able to redirect the comet's path away from Earth."
+
     window hide
     nvl clear
     window show
+
     n "After I awoke from my coma, I had to consider what my future held."
     n "With my limited knowledge of the portal, there was very little possibility of fixing it without the expertise of the dead Administrator.."
     n "Any possibilities of my return to the human world had vanished with the destruction of the portal."
     n "I met with Remy as soon as I could, who told me about what I had missed."
+
     window hide
     nvl clear
+
     $ renpy.pause (2.0)
-    $ evalDoingSecretEnding=True
+
+    $ evalDoingSecretEnding = True
 
     jump eval_post_secret_remy_meeting
 
 label eval_post_secret_remy_meeting:
-    $ persistent.evalSecretEndingCompleted=True
+    $ persistent.evalSecretEndingCompleted = True
     scene park2 with dissolveslow
     show remy normal with dissolvemed
     play music "mx/library.ogg" fadein 2.0
