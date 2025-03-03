@@ -3524,90 +3524,111 @@ label eval_goggles: #Meme scene. It's like bacon Naomi!
     $ persistent.evalGogglesScene = True
     jump eval_custom_credits
 
-label eval_special_mentions: #Special mentions to those who helped me
-    play sound "fx/system.wav"
-    s "[[Incoming Message]"
-    if player_name.lower() == "4onen":
-        s "Hello, 4onen. It's Eval."
-        s "Don't make fun of my writing too much, okay?"
-        s "Anyways, thanks for all the help and enjoy the mod."
-    if player_name.lower() == "joey":
-        s "Hello, Joey. It's Eval."
-        s "In hindsight, I might have made a mistake adding this."
-        s "If this makes little to no sense, you aren't the right Joey."
-        s "Thanks for all the help, Joey. Vara appreciates it."
-        s "Anyways, thanks for all the help and enjoy the mod."
-    if player_name.lower() == "jakzie":
-        s "Hello you! It's BKevin."
-        s "I'm kidding though, it's Eval."
-        s "Or is it?"
-        s "Anyways, enjoy the mod :)."
-    if player_name.lower() == "charu":
-        s "Hello, Charu. It's Eval."
-        s "Don't judge my writing too hard, alright?"
-        s "Anyways, thanks for all the help and enjoy the mod."
-    return
-
-
-label eval_custom_credits:
     # $ _game_menu_screen = None
     $ renpy.pause (2.0)
     $ renpy.block_rollback()
     play sound "mx/eveningmelody.ogg"
     $ renpy.pause (1.5)
+
     show extra9 at Pan ((-300, 0), (-490,0), 20.0)
     show evalcustomcredits1 at left
     with dissolvemed
+
     $ renpy.pause (12.0)
+
     scene black with dissolvemed
+
     if evalCurrentEnding == 4 or evalVaraAlive:
         show extra1 at Pan ((-600, 0), (-490,0), 20.0)
     else:
         show varadead at Pan((520, 0), (0, 326), 20.0)
     show credits1 at left
     with dissolvemed
+
     $ renpy.pause (8.0)
+
     show black2 at left with dissolvemed
+
     show credits2 at left with dissolvemed
+
     $ renpy.pause (8.0)
+
     scene black with dissolvemed
+
+
     show remysad at Pan ((750, 326), (1430, 0), 25.0)
     show credits3 at right
     with dissolvemed
+
     $ renpy.pause (8.0)
+
     show black2 at right with dissolvemed
+
     show credits4 at right with dissolvemed
+
     $ renpy.pause (8.0)
+
     scene black with dissolvemed
+
+
+
     show oranged at Pan ((-350, 326), (-850, 100), 20.0)
     show credits5 at left
     with dissolvemed
+
     $ renpy.pause (8.0)
+
     show black2 at left with dissolvemed
+
     show credits6 at left with dissolvemed
+
     $ renpy.pause (8.0)
+
     scene black with dissolvemed
+
+
+
+
     show cgspill at Pan((0, 90), (250, 184), 20.0)
     show credits7 at right
     with dissolvemed
+
     $ renpy.pause (8.0)
+
     show black2 at right with dissolvemed
+
     show credits8 at right with dissolvemed
+
     $ renpy.pause (8.0)
+
     scene black with dissolvemed
+
+
+
     show cg1 at Position(xpos=0.8, xanchor='center')
     show credits9 at left
     with dissolvemed
+
     $ renpy.pause (8.0)
+
     show black2 at left with dissolvemed
+
     show credits10 at left with dissolvemed
+
     $ renpy.pause (8.0)
+
     scene black with dissolvemed
+
     scene logo with dissolvemed
+
     $ renpy.pause (8.5)
+
     scene black with dissolvemed
+
     stop sound fadeout 1.0
+
     $ renpy.pause (4.0)
+
     $ persistent.anygoodending = True
     play sound "fx/system3.wav"
     m "Thank you for playing This Dragon Owes Me Ice Cream!"
