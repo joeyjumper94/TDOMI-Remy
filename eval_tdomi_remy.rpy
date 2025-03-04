@@ -3524,6 +3524,7 @@ label eval_goggles: #Meme scene. It's like bacon Naomi!
     $ persistent.evalGogglesScene = True
     jump eval_custom_credits
 
+label eval_custom_credits:
     # $ _game_menu_screen = None
     $ renpy.pause (2.0)
     $ renpy.block_rollback()
@@ -3688,5 +3689,4 @@ label eval_goggles: #Meme scene. It's like bacon Naomi!
     else:
         m "You somehow got to the end of this mod without getting an ending. Good job, I guess..."
     $ persistent.remygoodending = True
-    return
 #This file is way too long.

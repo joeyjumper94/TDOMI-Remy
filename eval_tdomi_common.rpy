@@ -423,12 +423,12 @@ label eval_extended_ending:
     if chap3picka == "katsu" or chap3pickb == "katsu":
         if renpy.python.store_dicts["store"].get("evalDoingSecretEnding",None)==None:
             play sound "fx/system3.wav"
-            s "uh oh, it seems like you loaded a \"broken\" save, let me see if i can fix it"
+            s "Uh-oh, it seems like you loaded a \"broken\" save, let me see if I can fix it.{cps=2}..{/cps}"
             call eval_tdomi_common from eval_tdomi_common_init_late
             play sound "fx/system3.wav"
-            s "Ok I think I fixed it"
+            s "Ok, I think I fixed it."
             play sound "fx/system3.wav"
-            s "you may want to play from very start to eliminate the remaining errors"
+            s "You may want to play from very start to eliminate the remaining errors."
         jump eval_tdomi_remy
     elif evalPathToSecretComplete:
         play sound "fx/system3.wav"
