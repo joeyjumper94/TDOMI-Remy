@@ -349,60 +349,27 @@ label eval_tdomi_remy:
                     Ry normal "So, what were you thinking?"
                     c "How about a nice walk around the area?"
                     Ry look "You really think that walking is more interesting than taking care of children?"
+                    c "It beats the yelling and screaming."
                     $ evalRemyStatus=remystatus#store remy's original status
                     $ remystatus="bad"#having Remy's status change to bad can add a punch to the gut
-                    c "It beats the yelling and screaming."
-                    $ evalRemyStatus = remystatus
-                    $ remystatus = "bad"
                     if evalVaraHere:
                         show vara sad flip with dissolvemed
                     Ry angry "You know what? Taking a simple walk sounds like a pretty boring day out together. I think I'd rather go to the orphanage by myself."
-                    hide remy with dissolvemed
+                    if evalVaraHere:
+                        hide vara
+                    hide remy
+                    with dissolvemed
                     stop music fadeout 2.0
                     play sound "fx/evalgrasswalk1.ogg"
                     m "The dragon stormed off and prepared to fly over to the orphanage."
                     
                     menu:
                         "[[Stop Remy]" if not evalVaraHere:
-                            c "Wait! Remy!"
-                            play sound "fx/evalgrasswalk2.ogg"
-                            m "Remy looked at me and walked back over."
-                            $ renpy.pause (1.0)
-                            show remy look with dissolvemed
-                            Ry "What?"
-                            play music "mx/jazzy.ogg"
-                            $ remystatus=evalRemyStatus#you were quick to apolgize for your rash decision and his mood is restored
-                            c "I'm sorry, you're right. It was extremely selfish of me to prioritize my own enjoyment over that of yours and the childrens'."
-                            Ry normal "I'm glad to hear that. I was worried for a second that you really were just that unkind."
-                            c "No, I think I just overreacted. Human children can be a complete nightmare sometimes."
-                            Ry "Well, so can dragon children, but you just learn to accept that they haven't had as much time on the planet as us, and sometimes have difficulty expressing their emotions in other ways."
-                            c "I guess..."
-                            Ry smile "Plus, I think this experience will be a lot more fun than you think."
-                            c "You're probably right."
-                            Ry normal "Great, we can start making our way over there now!"
-                            jump eval_trip_to_orphanage
+                            pass
 
                         "[[Stop them]" if evalVaraHere:
-                            c "Wait! Remy!"
-                            play sound "fx/evalgrasswalk2.ogg"
-                            m "Remy and Vara looked at me and walked back over."
-                            $ renpy.pause (1.0)
-                            show vara sad flip at Position(xpos=0.30, xanchor='center', ypos=0.8, yanchor="center")
-                            show remy look behind vara at Position(xpos=0.70,xanchor='center',ypos=1.0,yanchor="bottom")
-                            with dissolvemed
-                            Ry "What?"
-                            play music "mx/jazzy.ogg"
-                            c "I'm sorry, you're right. It was extremely selfish of me to prioritize my own enjoyment over that of yours and the childrens'."
-                            $ remystatus = evalRemyStatus
-                            Ry normal "I'm glad to hear that. I was worried for a second that you really were just that unkind."
-                            c "No, I think I just overreacted. Human children can be a complete nightmare sometimes."
-                            show vara normal flip with dissolvemed
-                            Ry "Well, so can dragon children, but you just learn to accept that they haven't had as much time on the planet as us, and sometimes have difficulty expressing their emotions in other ways."
-                            c "I guess..."
-                            Ry smile "Plus, I think this experience will be a lot more fun than you think."
-                            c "You're probably right."
-                            Ry normal "Great, we can start making our way over there now!"
-                            jump eval_trip_to_orphanage
+                            pass
+
                         "[[Let him leave]":
                             play sound "fx/takeoff.ogg"
                             if evalVaraHere:
@@ -424,6 +391,30 @@ label eval_tdomi_remy:
                             s "Why did you go through all the trouble of saving Vara just to do that?"
                             $ evalFail = "Child Hater"
                             jump eval_fails
+
+                    c "Wait! Remy!"
+                    play sound "fx/evalgrasswalk2.ogg"
+                    m "Remy and Vara looked at me and walked back over."
+                    $ renpy.pause (1.0)
+                    if evalVaraHere:
+                        show vara sad flip at Position(xpos=0.30, xanchor='center', ypos=0.8, yanchor="center")
+                        show remy look behind vara at Position(xpos=0.70,xanchor='center',ypos=1.0,yanchor="bottom")
+                    else:
+                        show remy look
+                    with dissolvemed
+                    Ry "What?"
+                    play music "mx/jazzy.ogg"
+                    c "I'm sorry, you're right. It was extremely selfish of me to prioritize my own enjoyment over that of yours and the childrens'."
+                    $ remystatus = evalRemyStatus
+                    Ry normal "I'm glad to hear that. I was worried for a second that you really were just that unkind."
+                    c "No, I think I just overreacted. Human children can be a complete nightmare sometimes."
+                    show vara normal flip with dissolvemed
+                    Ry "Well, so can dragon children, but you just learn to accept that they haven't had as much time on the planet as us, and sometimes have difficulty expressing their emotions in other ways."
+                    c "I guess..."
+                    Ry smile "Plus, I think this experience will be a lot more fun than you think."
+                    c "You're probably right."
+                    Ry normal "Great, we can start making our way over there now!"
+                    jump eval_trip_to_orphanage
 
 label eval_trip_to_orphanage:
     c "It's a bit far, is it not? The doctor said I shouldn't be walking too much."
