@@ -180,6 +180,9 @@ label eval_tdomi_remy:
         Ry look "I find it strange that he didn't think to move here earlier."
         c "Considering his old spot worked well for forty years, it was probably pretty difficult to decide on a move."
         Ry normal "I guess you're right."
+    Ry look 'Wait, are you sure your "all you can eat buffet pass" applies to your friends as well?'
+    c "I'm sure it will be fine."
+    Ry normal "In that case, is there anyone else you would like to invite?"
     if not persistent.evalEndingBUnlocked and not persistent.evalEndingCUnlocked: #This makes it so that there is no single option menu at the start of the mod
         $ evalVaraAlive = False
         $ save_name = (_("TDOMI - Remy"))
@@ -191,9 +194,6 @@ label eval_tdomi_remy:
         jump eval_solo_remy_1
     elif evalVaraHere and adinestatus != "bad" and not adinedead:
         jump eval_vara_forced_path
-    Ry look 'Wait, are you sure your "all you can eat buffet pass" applies to your friends as well?'
-    c "I'm sure it will be fine."
-    Ry normal "In that case, is there anyone else you would like to invite?"
     menu:
         "No.":
             $ save_name = (_("TDOMI - Remy"))
@@ -3680,4 +3680,6 @@ label eval_custom_credits:
     else:
         m "You somehow got to the end of this mod without getting an ending. Good job, I guess..."
     $ persistent.remygoodending = True
+    jump mainmenu
 #This file is way too long.
+s "what are you doing here?"
