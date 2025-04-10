@@ -944,7 +944,7 @@ label eval_solo_remy_1: #Ending with only Remy
             Ry normal "You really got me for a second, Katsuharu. Thank you, that's very generous of you."
             label eval_skip_A1:
                 pass
-            Ka normal flip "But enough chat-chat, we have to get to the more important matters."
+            Ka normal flip "But enough chit-chat, we have to get to the more important matters."
             c "Like?"
         "No time for chatting.":
             c "No time for chatting, we are here for important ice cream related matters."
