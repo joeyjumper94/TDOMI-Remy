@@ -3677,6 +3677,9 @@ label eval_custom_credits:
     else:
         m "You somehow got to the end of this mod without getting an ending. Good job, I guess..."
     $ persistent.remygoodending = True
+    python:#pop all calls so we can get to the main menu from here
+        while renpy.call_stack_depth()>0:
+            renpy.pop_call()
     jump mainmenu
 #This file is way too long.
 s "what are you doing here?"
