@@ -225,7 +225,7 @@ label eval_tdomi_remy:
             
             Ry normal "But anyways, the orphanage is on the other side of town. How about you wait here while I pick up Amely?"
             c "Are you sure you don't want me to come as well?"
-            Ry smile "Unless you magically sprout wings, I think this is out best bet."
+            Ry smile "Unless you magically sprout wings, I think this is our best bet."
             c "You never know, I'm full of surprises."
             Ry normal "That is something that I cannot disagree with."
             c "Alright, I'll see you in a bit then."
@@ -1942,10 +1942,10 @@ label eval_remy_amely_1:
             hide remy with dissolvemed
             play sound "fx/takeoff.ogg"
             m "Just like that, the dragon gracefully took off into the air, soaring away over the trees."
-            stop music fadeout 2.0
-            scene black with dissolveslow
-            $ persistent.evalEndingB = True
-            jump eval_custom_credits
+    stop music fadeout 2.0
+    scene black with dissolveslow
+    $ persistent.evalEndingB = True
+    jump eval_custom_credits
 
 label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyone, idk what you're talking about.
     #Going to use this twice, one where you DO ride remy beforehand and when you DO help at the orphanage. That's gonna be a lot of refactoring...
