@@ -199,7 +199,8 @@ label eval_everyone_1:
     show remy normal at right
     show vara smnormal at right
     show amely smnormal at right
-    with move
+    with ease
+    $renpy.pause(1.5)
     show adine normal c flip behind amely at left with easeinleft
     
     if persistent.evalD1Skip:
@@ -360,11 +361,15 @@ label eval_everyone_1:
     Ry normal "Quite the coincidence indeed."
     Ad normal b flip "Alright, Amely, let's go."
     Am "Sugar!!!"
-    hide amely with easeoutright
+    show amely smnormal with dissolve
+    $renpy.pause(0.5)
+    hide amely with easeoutleft
     play sound "fx/door/door_open.wav"
     $ renpy.pause (0.5)
     Ad "Whoah! Wait for me, Amely! I'm the one with wings here!"
-    hide adine with easeoutright
+    show adine normal b with dissolve
+    $ renpy.pause(1.0)
+    hide adine with easeoutleft
     $ renpy.pause (1.0)
     play sound "fx/door/door_open.wav"
     $ renpy.pause (1.5)
@@ -409,6 +414,7 @@ label eval_everyone_1:
     m "Remy walked over to the pot and tilted it up with his muzzle."
     m "I put the key back, and he carefully rested the pot back in it's upright position."
     Ry "Perfect! Let's go!"
+    scene black with dissolveslow
     if evalRodeRemy:
         m "Remy walked forward and quickly picked up speed."
         m "As a seasoned dragon rider. I sat back and gazed up at the sky, gently holding onto Vara to keep her safe." #Is this too... weird?
@@ -426,6 +432,8 @@ label eval_everyone_1:
             m "I gently held onto Vara to keep her safe as I watched the dragon world pass by me."
         m "I sat back and gazed up at the sky, gently holding onto Vara to keep her secure on Remy's back."
     $ renpy.pause (0.5)
+    scene park2 with dissolveslow
+    $renpy.pause(1.0)
     m "It seemed as if it took mere minutes to arrive back at Tatsu Park."
     Ry "Ladies and gentlemen, this will be our final stop. Please make sure to grab all of your belongings and safely exit the vehicle."
     if not evalBadRemyJoke:
@@ -1083,7 +1091,7 @@ label eval_everyone_2:
         $ evalAdineSlaps += 1
         m "Giving me no time to react, I got another slap across the face."
         m "Taken aback, my cone fell from my grasp and onto the concrete."
-        Ad giggle b "You're joke wasn't funny. I just wanted to catch you off guard."
+        Ad giggle b "Your joke wasn't funny. I just wanted to catch you off guard."
         m "I rubbed my burning cheek."
         c "Ow! You made my drop my ice cream."
         Ka exhausted flip "You two really are something else. I can get you another scoop, [player_name]."
@@ -1320,15 +1328,15 @@ label eval_everyone_2:
                 play sound "fx/takeoff.ogg"
                 m "With Amely tightly grasped within her claws, Adine soared into the night sky."
             "I forgive you, on one condition.":
-                Ad sad b flip "what is it?"
-                c "let's all agree to not pull pranks when the children are preset."
+                Ad sad b flip "What is it?"
+                c "Let's all agree to not pull pranks when the children are preset."
                 Ad normal b flip "sure."
                 if evalAdineTrickPassed:#if you gave Amely Adine's bad ice cream
-                    c "that prank may have been funny if I kept my ice cream."
-                    c "I probably would have deserved it."
+                    c "That prank would have been funny if I kept my ice cream."
+                    c "And I probably would have deserved it too."
                 else:
-                    c "I kind deserved it."
-                    c "but I nearly gave Amely that ice cream."
+                    c "I kinda deserved it."
+                    c "Then again, I nearly gave Amely that ice cream."
                 jump evalAdineTrickForgave
             "You went too far, Adine.":#shame on you MC, she already felt bad about that.
                 $ adinestatus = "none"
@@ -1622,7 +1630,7 @@ label eval_everyone_2:
     Ry "I understand. I was going to tell Vara once we arrived at the orphanage, but when she had the idea to surprise you, I decided to announce it here instead."
     Ry "You mean a lot to the both of us, [player_name]. It felt only natural that you would be present when I broke the news to her."
     Ry shy "I know I may sound like a broken record at this point, but thank you for everything."
-    Ry "This day out{w}, this wonderful little dragon that I can call my daughter{w}, and even my life. I owe it all to you."
+    Ry "This day out,{w=1} this wonderful little dragon that I can call my daughter,{w=1} and even my life.{w} I owe it all to you."
     c "Remy, I don't know what to say."
     Ry "Then don't say anything. What you have done for us speaks louder than any words could."
     hide remy with dissolvemed
@@ -1881,7 +1889,7 @@ label eval_everyone_2:
             stop music fadeout 2.0
             scene black with dissolveslow
             $ renpy.pause (2.0)
-        "[[Reject]":
+        "[[Reject.]":
             c "Sorry, Remy, but I don't think I'm ready to take our relationship any further."
             c "You mean a lot to me, but I just can't say I'm ready."
             Ry "I understand. Maybe I was pushing you too hard. Would you be open to something in the future?"

@@ -16,7 +16,7 @@
 
 label eval_katsu_help_init:
     #Shuffle the customers for a surprise every time!
-    $ customers = ["8", "Dram", "Em", "Grey", "Kali", "Kev", "Ley", "Oph", "Xith", "Lucius"]
+    $ customers = ["8th", "Dram", "Em", "Grey", "Kali", "Kev", "Ley", "Oph", "Xith", "Lucius"]
     $ renpy.random.shuffle(customers)
 
     $ evalPlayedKatsuGame = True
@@ -104,14 +104,14 @@ label eval_katsu_help:
             jump eval_everyone_2
     
     #Some intermediate dialogue
-    if evalServedCustomers == 2:
+    elif evalServedCustomers == 2:
         m "I noticed that we were starting to catch up with the line of dragons."
     
-    if evalServedCustomers == 8:
+    elif evalServedCustomers == 8:
         m "I noticed that the end of the line was quickly approaching. We were almost done."
     
     #Some fun scenes to throw in
-    if evalServedCustomers == 3:
+    elif evalServedCustomers == 3:
         m "Suddenly, I saw two dragons dart past my vision."
         Ad normal b "Amely! Where are you going?"
         show amely smnormal flip with easeinleft
@@ -123,7 +123,7 @@ label eval_katsu_help:
         hide adine with easeoutright
         m "Looks like Adine isn't doing her job very well..."
     
-    if evalServedCustomers == 7:
+    elif evalServedCustomers == 7:
         m "Suddenly, I saw Amely run past the stand."
 #        show amely smnormal at Position(xpos=.0, xanchor='right') with easeinright
         show amely smnormal at Position(xpos=.99, xanchor='left') with easeinright
@@ -150,7 +150,7 @@ label eval_katsu_help:
     $ evalCharacterMood = renpy.random.randint(0, 2) #0 - Fast, 1 - Clean, 2 - A lot
 
     #Oh god...
-    if customers[evalServedCustomers] == "8":
+    if customers[evalServedCustomers] == "8th":
         jump eval_help_8th
     elif customers[evalServedCustomers] == "Dram":
         jump eval_help_dram
@@ -385,7 +385,7 @@ label eval_help_em:
         c "No problem. What can I get you?"
         Em ques "I'll take the cherry please. It is quite a sophisticated flavor if you ask me."
     elif evalCharacterMood == 1:
-        Em "You know, I've heard great things about Katsuharu's ice cream. I hope I'm not disappointed."
+        Em "You know, I've been a loyal customer for years. Don't disappoint me."
         c "Of course. What can I get you?"
         Em ques "I'll take only your finest scoop of cherry, please. It is quite a sophisticated flavor if you ask me."
     elif evalCharacterMood == 2:

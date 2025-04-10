@@ -241,6 +241,7 @@ label eval_tdomi_remy:
 
         "Amely and Adine." if adinestatus != "bad" and not adinedead and not evalDoingSecretEnding and persistent.evalEndingCUnlocked: #Adine won't accept the invitation if she dislikes our MC or if she's dead
             $ save_name = (_("TDOMI - Adine"))
+            $ evalCurrentEnding = 3
             c "Why don't we take Amely and Adine as well?"
             c "As a little hatchling, I'm sure that Amely would love to go and get some ice cream, and Adine has done so much for the both of us."
             Ry smile "It's been ages since I've had the opportunity to sit down and have a little get-together with everyone."
@@ -573,7 +574,7 @@ label eval_trip_to_orphanage:
             Ry look "Well, that's not good."
             play sound "fx/lightswitch.mp3"
             $ renpy.pause (2.0)
-            play sound "fx/ligtswitch.mp3"
+            play sound "fx/lightswitch.mp3"
             $ renpy.pause (2.0)
             show remy normal flip with easeinleft
             show remy normal with dissolvemed
@@ -845,7 +846,7 @@ label eval_trip_to_orphanage:
             Ry look "Well, that's not good."
             play sound "fx/lightswitch.mp3"
             $ renpy.pause (2.0)
-            play sound "fx/ligtswitch.mp3"
+            play sound "fx/lightswitch.mp3"
             $ renpy.pause (2.0)
             show remy look flip with easeinleft
             show remy look with dissolvemed
@@ -1952,10 +1953,13 @@ label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyon
     play sound "fx/wooshes.ogg"
     $ renpy.pause (3.0)
     Ry smile "I wonder who that could be?"
-    play sound "fx/door/door_open.wav"
+    $renpy.pause(0.5)
     show amely smnormal at right
     show remy normal behind amely at right
-    with move
+    with ease
+    $renpy.pause(1.0)
+    play sound "fx/door/door_open.wav"
+    $renpy.pause(2.5)
     show adine normal c flip at left with easeinleft
 
     if persistent.evalC1Skip:
@@ -2096,19 +2100,22 @@ label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyon
     Ry look "Great... Let's just get going."
     Ad "Alright, Amely, let's go."
     Am "Sugar!!!"
-    show amely smnormal flip with dissolvemed
-    hide amely with easeoutright
+    hide amely with easeoutleft
     play sound "fx/door/door_open.wav"
     $ renpy.pause (0.5)
     Ad "Whoah! Wait for me Amely! I'm the one with wings here!"
-    hide adine with easeoutright
+    show adine normal b with dissolve
+    $ renpy.pause(1.0)
+    hide adine with easeoutleft
     $ renpy.pause (1.0)
     play sound "fx/door/door_open.wav"
     $ renpy.pause (1.5)
     play sound "fx/takeoff.ogg"
     m "After a moment, Adine caught up with Amely. Clutching the little hatchling in her claws, she took off and soared into the air."
-    hide remy with dissolvemed
-    show remy normal with dissolvemed
+    $ renpy.pause(1.0)
+    show remy at center with ease
+    $ renpy.pause(0.5)
+    
     if not evalRodeRemy:
         Ry "Before you say anything, we are not going to take another scenic walk back to Tatsu Park."
         c "Damn, but it was so pretty coming over here!"
@@ -2184,6 +2191,8 @@ label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyon
     else:
         m "I sat back and gazed up at the sky." #Is this too... weird?
     $ renpy.pause (0.5)
+    scene park2 with dissolveslow
+    $ renpy.pause (1.0)
     m "It seemed as if it took mere minutes to arrive back at Tatsu Park."
     Ry "Ladies and gentlemen, this will be our final stop. Please make sure to grab all of your belongings and safely exit the vehicle."
     if not evalBadRemyJoke:
@@ -2194,7 +2203,6 @@ label eval_remy_amely_adine_1: #Ending where "everyone" is here! Totally everyon
         Ry "Nonsense."
     play sound "fx/bed.ogg"
     m "I slid off of Remy's back."
-    scene park2 with dissolveslow
     show remy normal with dissolvemed
     play music "mx/funness.ogg"
     if evalRodeRemy:
@@ -3628,6 +3636,7 @@ label eval_custom_credits:
             s "It seems that you have unlocked another ending!"
             s "Play through the content again to discover it!"
             $ persistent.evalEndingBUnlocked = True
+
     elif evalCurrentEnding == 2:
         m "You got Remy and Amely's ending!"
         if not persistent.evalEndingCUnlocked:
@@ -3677,9 +3686,13 @@ label eval_custom_credits:
     else:
         m "You somehow got to the end of this mod without getting an ending. Good job, I guess..."
     $ persistent.remygoodending = True
-    python:#pop all calls so we can get to the main menu from here
+
+    python:
         while renpy.call_stack_depth()>0:
             renpy.pop_call()
+            
     jump mainmenu
+    
+    
 #This file is way too long.
 s "what are you doing here?"
