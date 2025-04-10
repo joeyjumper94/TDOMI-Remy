@@ -98,9 +98,6 @@ label eval_tdomi_remy:
     nvl clear
     m "Wait a minute!" with Shake ((0, 0, 0, 0), 2, dist=10)
     $ renpy.pause (1.0)
-    if not persistent.evalNotFirstTimePlaying:
-        call eval_special_mentions from _eval_mentions
-    $ persistent.evalNotFirstTimePlaying = True
     $ evalVaraAlive = False
     if evalDoingSecretEnding:
         $ evalVaraAlive = True
